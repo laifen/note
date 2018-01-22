@@ -1,0 +1,36 @@
+getopts/getop
+getopts:
+
+#!/bin/bash
+while getopts 'd:Dm:f:t:' OPT; do
+    case $OPT in
+        d)
+            DEL_DAYS="$OPTARG";;
+        D)
+            DEL_ORIGINAL='yes';;
+        f)
+            DIR_FROM="$OPTARG";;
+        m)
+            MAILDIR_NAME="$OPTARG";;
+        t)
+            DIR_TO="$OPTARG";;
+        ?)
+            echo "Usage: `basename $0` [options] filename"
+    esac
+done
+
+shift $(($OPTIND - 1))
+
+在上面的例子中， getopts后面的内容是它的参数列表，带：的意味着它还会带一个参数选项。
+               没有带：的相当于true/false
+               如果命令行中包含了没有在getopts列表中的选项，会有警告信息，如果在整个getopts字符串前面也加上个:，就能消除警告信息了。
+  
+  使用getopts识别出各个选项之后，就可以配合case来操作：
+                    操作中有两个相对固定的"常量":OPTARG   OPTIND
+                     OPTARG：取当前选项的值
+                     OPTIND：代表当前选项在参数列表中的位移
+              example:       
+              
+                    
+
+
